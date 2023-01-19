@@ -12,8 +12,9 @@ public class Tests
     [Test]
     public void Test1()
     {
-        UsersClient usersClient = new UsersClient();
-        var user = usersClient.GetUser(1);
-        Assert.AreEqual(user.Data.FirstName, "George");
+        int postId = 1;
+        PostsClient postsClient = new PostsClient();
+        var post = postsClient.GetPost(postId);
+        Assert.That(post.Id, Is.EqualTo(postId.ToString()));
     }
 }
