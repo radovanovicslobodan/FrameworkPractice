@@ -14,8 +14,6 @@ public class PostsClient
 
         Post postResponse = JsonSerializer.Deserialize<Post>(response.Content);
 
-        // Post postResponse = JsonConvert.DeserializeObject<Post>(response.Content);
-
         return postResponse;
     }
 
