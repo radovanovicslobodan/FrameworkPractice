@@ -18,4 +18,14 @@ public class PostsClient
 
         return postResponse;
     }
+
+    public List<Post> GetPosts()
+    {
+        RestRequest request = new RestRequest("", Method.Get);
+        var response = client.Execute(request);
+
+        List<Post> postsResponse = JsonSerializer.Deserialize<List<Post>>(response.Content);
+
+        return postsResponse;
+    }
 }
