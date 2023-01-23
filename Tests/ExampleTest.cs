@@ -14,6 +14,6 @@ public class Tests
     {
         UsersClient usersClient = new UsersClient();
         var user = usersClient.GetUser(1);
-        Assert.AreEqual(user.Data.FirstName, "George");
+        Assert.AreEqual("George", user.Data.FirstName);
     }
 }
