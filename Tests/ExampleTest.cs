@@ -15,6 +15,6 @@ public class Tests
         int postId = 1;
         PostsClient postsClient = new PostsClient();
         var post = postsClient.GetPost(postId);
-        Assert.That(post.Id, Is.EqualTo(postId.ToString()));
+        Assert.That(post.id, Is.EqualTo(postId));
     }
 }
