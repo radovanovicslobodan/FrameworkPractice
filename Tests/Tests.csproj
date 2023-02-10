@@ -15,5 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework\Clients\HttpClient\HttpClient.csproj" />
+    <ProjectReference Include="..\Api\Api.csproj" />
+    <ProjectReference Include="..\Payloads\Payloads.csproj" />
   </ItemGroup>
 </Project>
