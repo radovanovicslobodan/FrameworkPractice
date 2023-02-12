@@ -1,6 +1,7 @@
 using HttpTracer;
 using HttpTracer.Logger;
 using RestSharp;
+using RestSharp.Authenticators;
 
 public class ClientBase
 {
@@ -16,6 +17,7 @@ public class ClientBase
                 new HttpTracerHandler(handler, new ConsoleLogger(), HttpMessageParts.RequestHeaders)
         };
         client = new RestClient(options);
+        client.AddCookie("Cookie", "admin123", uri.AbsolutePath, uri.Host);
     }
 
     public RestResponse Get(RestRequest request)

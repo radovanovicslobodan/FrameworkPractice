@@ -3,16 +3,23 @@ using HttpClient.Constants;
 using HttpClient.Models;
 using RestSharp;
 using RestSharp.Serializers;
+using HttpClient.HttpHeaderManager;
+using RestSharp.Authenticators;
 
 namespace Framework.Clients.HttpClient;
 
 public class BookingClientExt : ClientBase
 {
 
-    public BookingClientExt(string baseUrl) : base(baseUrl) { }
+    public BookingClientExt(string baseUrl) : base(baseUrl)
+    {
+        // client.Authenticator = new JwtAuthenticator("asdfasdfasdf");
+    }
 
     public RestResponse getBookings()
     {
+        client.Authenticator = new JwtAuthenticator("asdfasdfasdf");
+        client.AddCookie("TEST_COOKIE", "cookie_value123", uri.AbsolutePath, uri.Host);
         var request = new RestRequest("/booking")
             .AddHeader("Accept", "application/json");
         var response = Get(request);
@@ -41,7 +48,7 @@ public class BookingClientExt : ClientBase
         var headers = new List<KeyValuePair<string, string>>();
         headers.Add(Headers.AcceptJson);
 
-        var headers2 = Headers.CreateHeaders();
+        var headers2 = HttpHeaderManager.CreateHeaders();
         headers2.Add(Headers.AcceptJson);
 
         // var headers3 = Constants.Constants.CreateHeaders()

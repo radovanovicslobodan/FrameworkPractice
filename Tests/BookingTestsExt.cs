@@ -14,6 +14,7 @@ public class BookingTestsExt
     public void GetBookings()
     {
         BookingClientExt clientExt = new BookingClientExt("https://restful-booker.herokuapp.com/");
+
         RestResponse response1 = clientExt.getBookings();
         RestResponse response2 = clientExt.getBookings2();
         response1.StatusCode.Should().Be(HttpStatusCode.OK);
