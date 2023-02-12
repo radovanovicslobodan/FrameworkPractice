@@ -1,12 +1,21 @@
+using HttpTracer;
+using HttpTracer.Logger;
 using RestSharp;
 
 public class ClientBase
 {
     public RestClient client;
+    public Uri uri;
 
     public ClientBase(string baseUrl)
     {
-        client = new RestClient(baseUrl);
+        uri = new Uri(baseUrl);
+        var options = new RestClientOptions(uri)
+        {
+            ConfigureMessageHandler = handler =>
+                new HttpTracerHandler(handler, new ConsoleLogger(), HttpMessageParts.RequestHeaders)
+        };
+        client = new RestClient(options);
     }
 
     public RestResponse Get(RestRequest request)

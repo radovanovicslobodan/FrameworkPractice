@@ -1,4 +1,5 @@
 using Framework.Clients.HttpClient.Models;
+using HttpClient.Constants;
 using HttpClient.Models;
 using RestSharp;
 using RestSharp.Serializers;
@@ -21,8 +22,15 @@ public class BookingClientExt : ClientBase
 
     public RestResponse getBookings2()
     {
+        ICollection<KeyValuePair<string, string>> headers = new List<KeyValuePair<string, string>>();
+        headers.Add(new KeyValuePair<string, string>("Accept", ContentType.Json));
+
+        var headers2 = new List<KeyValuePair<string, string>>();
+        headers2.Add(Headers.AcceptJson);
+
         var request = new RestRequest("/booking")
-            .AddHeader("Accept", "application/json");
+            // .AddHeader("Accept", "application/json")
+            .AddHeaders(headers2);
         var response = Get(request);
 
         return response;
@@ -30,8 +38,21 @@ public class BookingClientExt : ClientBase
 
     public Post getPost()
     {
+        var headers = new List<KeyValuePair<string, string>>();
+        headers.Add(Headers.AcceptJson);
+
+        var headers2 = Headers.CreateHeaders();
+        headers2.Add(Headers.AcceptJson);
+
+        // var headers3 = Constants.Constants.CreateHeaders()
+        //     .Add(Constants.Constants.AcceptJson);
+
         var request = new RestRequest()
-            .AddHeader("Accept", "application/json");
+            // .AddHeader("Accept", ContentType.JsonAccept)
+            // .AddHeaders(Framework.Clients.HttpClient.Constants.Constants.Headers.Add(Constants.Constants.AcceptJson));
+            // .AddHeaders(headers);
+            .AddHeaders(headers2);
+        // request.RequestFormat=ContentType.JsonAccept;
         var response = Get<Post>(request);
 
         return response;
